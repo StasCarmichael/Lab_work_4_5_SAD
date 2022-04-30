@@ -4,7 +4,7 @@ namespace BLL.ConnectionInterface
 {
     public interface ISingleClientConnection
     {
-        int UserId { get; }
+        int ClientId { get; }
         Client Client { get; }
     }
 }

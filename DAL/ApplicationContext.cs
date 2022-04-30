@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using BLL.Entity;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
-    class ApplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
         private string connectionString;
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
 
         public ApplicationContext()

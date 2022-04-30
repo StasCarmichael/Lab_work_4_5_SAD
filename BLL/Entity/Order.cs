@@ -9,10 +9,9 @@ namespace BLL.Entity
     public class Order : IOrder
     {
 
-        public Order(IClient client, double orderAmount, DateTime date, int sinceWhen, int toWhen)
+        private Order() { }
+        public Order(double orderAmount, DateTime date, int sinceWhen, int toWhen)
         {
-            this.Client = client as Client;
-
             Year = date.Year;
             Month = date.Month;
             Day = date.Day;
@@ -44,7 +43,7 @@ namespace BLL.Entity
         }
 
 
-        public int UserId { get; private set; }
+        public int ClientId { get; private set; }
         public Client Client { get; private set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using BLL.Interface;
@@ -14,12 +15,11 @@ namespace BLL.Entity
         {
             Name = name;
             Surname = surname;
-        }
-        public Client(string name, string surname, double amountOfMoney)
-        {
-            Name = name;
-            Surname = surname;
 
+            Orders = new LinkedList<Order>();
+        }
+        public Client(string name, string surname, double amountOfMoney) : this(name , surname)
+        {
             this.amountOfMoney = amountOfMoney;
         }
 
@@ -62,5 +62,18 @@ namespace BLL.Entity
 
         #endregion
 
+
+        public void AddOrder(Order order) { Orders.Add(order); }
+        public bool RemoveOrder(Order order) { return Orders.Remove(order); }
+        public bool RemoveOrder(int orderId)
+        {
+            var res = Orders.Where(val => val.Id == orderId).FirstOrDefault();
+            if (res != null)
+                return Orders.Remove(res);
+            else
+                return false;
+        }
+
+        public ICollection<Order> Orders { get; private set; }
     }
 }

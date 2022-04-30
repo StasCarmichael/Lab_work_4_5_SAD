@@ -7,7 +7,7 @@ using BLL.ConnectionInterface;
 
 namespace BLL.Interface
 {
-   public interface IRestroom : IIdable
+    public interface IRestroom : IIdable
     {
 
     }
