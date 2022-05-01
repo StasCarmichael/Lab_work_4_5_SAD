@@ -40,7 +40,8 @@ namespace UI
             }
             */
 
-            
+
+            /*
             using (ApplicationContext context = new ApplicationContext())
             {
                 context.Database.EnsureCreated();
@@ -51,7 +52,7 @@ namespace UI
 
                 restroom.First().UnreserveRestroom(3);
 
-                /*
+                
                 foreach (var item in clients)
                 {
                     Console.WriteLine("Name = " + item.Name + "  Surname = " + item.Surname);
@@ -61,11 +62,50 @@ namespace UI
                     }
                     Console.WriteLine("========================");
                 }
-                */
+                
 
                 context.SaveChanges();
             }
-            
+            */
+
+
+            /*
+            using (ApplicationContext context = new ApplicationContext())
+            {
+                context.Database.EnsureCreated();
+
+                var restrooms = context.Restrooms.ToList();
+                var clients = context.Clients.ToList();
+                var orders = context.Orders.ToList();
+
+                var restroom1 = new Restroom("Настільні ігри", 20, 10, 20);
+                var client1 = clients.Where(val => val.Id == 1).FirstOrDefault();
+                restroom1.ReserveRestroom(client1, new DateTime(2022, 05, 12), 10, 18);
+                restroom1.ReserveRestroom(client1, new DateTime(2022, 05, 12), 16, 20);
+
+                context.Restrooms.Add(restroom1);
+                
+                context.SaveChanges();
+            }
+            */
+
+
+            using (ApplicationContext context = new ApplicationContext())
+            {
+                context.Database.EnsureCreated();
+
+                var restrooms = context.Restrooms.ToList();
+                var clients = context.Clients.ToList();
+                var orders = context.Orders.ToList();
+
+                var restroom1 = restrooms.Where(val => val.Id == 2).FirstOrDefault();
+                var client1 = clients.Where(val => val.Id == 2).FirstOrDefault();
+                restroom1.ReserveRestroom(client1, new DateTime(2022, 05, 2), 10, 13);
+
+                context.SaveChanges();
+            }
+
+
         }
     }
 }

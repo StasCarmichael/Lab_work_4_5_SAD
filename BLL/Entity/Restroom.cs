@@ -81,7 +81,7 @@ namespace BLL.Entity
             return timeList;
         }
 
-        public bool ReserveRestroom(IClient client, DateTime dateTime, int workOut, int workUp)
+        public (bool result, Order order) ReserveRestroom(IClient client, DateTime dateTime, int workOut, int workUp)
         {
             if ((dateTime - DateTime.Now).TotalDays <= MAX_DAY && workOut >= WorkOut && workUp <= WorkUp && workOut < workUp)
             {
@@ -95,7 +95,7 @@ namespace BLL.Entity
                         var res = freeTime.Contains(time);
 
                         if (res == false)
-                            return false;
+                            return (false, null);
                     }
 
                     var dataClient = client as Client;
@@ -106,11 +106,11 @@ namespace BLL.Entity
                     orders.Add(order);
                     client.AddOrder(order);
 
-                    return true;
+                    return (true, order);
                 }
             }
 
-            return false;
+            return (false, null);
         }
 
         public bool UnreserveRestroom(Order order)

@@ -1,5 +1,4 @@
-﻿
-namespace BLL.ConnectionInterface
+﻿namespace BLL.ConnectionInterface
 {
     public interface IIdable
     {
