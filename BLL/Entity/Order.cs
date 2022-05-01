@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using BLL.Interface;
@@ -10,7 +9,7 @@ namespace BLL.Entity
     {
 
         private Order() { }
-        public Order(double orderAmount, DateTime date, int sinceWhen, int toWhen)
+        internal Order(double orderAmount, string typeRecreation,  DateTime date, int sinceWhen, int toWhen)
         {
             Year = date.Year;
             Month = date.Month;
@@ -20,12 +19,15 @@ namespace BLL.Entity
             ToWhen = toWhen;
 
             OrderAmount = orderAmount;
+            TypeRecreation = typeRecreation;
         }
 
 
         [Key]
         public int Id { get; private set; }
 
+
+        public string TypeRecreation { get; private set; }
         public double OrderAmount { get; private set; }
 
 
@@ -45,5 +47,9 @@ namespace BLL.Entity
 
         public int ClientId { get; private set; }
         public Client Client { get; private set; }
+
+
+        public int RestroomId { get; private set; }
+        public Restroom Restroom { get; private set; }
     }
 }

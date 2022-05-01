@@ -1,4 +1,5 @@
-﻿using BLL.ConnectionInterface;
+﻿using BLL.Entity;
+using BLL.ConnectionInterface;
 
 namespace BLL.Interface
 {
@@ -6,5 +7,9 @@ namespace BLL.Interface
     {
         string Name { get; set; }
         string Surname { get; set; }
+
+        void AddOrder(Order order);
+        public bool RemoveOrder(Order order);
+        public bool RemoveOrder(int orderId);
     }
 }

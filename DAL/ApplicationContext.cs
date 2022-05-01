@@ -12,6 +12,8 @@ namespace DAL
     {
         private string connectionString;
 
+
+        public DbSet<Restroom> Restrooms { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
 

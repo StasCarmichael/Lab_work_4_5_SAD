@@ -21,44 +21,37 @@ namespace UI
                 context.Database.EnsureCreated();
 
 
+                Restroom restroom1 = new Restroom("Перегляд кіно", 100, 8, 22);
+
                 Client client1 = new Client("Stas", "Kyrei", 300);
                 Client client2 = new Client("Elic", "Wise");
 
-
-                Order order1 = new Order(200, DateTime.Now, 8, 10);
-                Order order2 = new Order(10, DateTime.Now, 6, 7);
-                Order order3 = new Order(1000, DateTime.Now, 10, 15);
-                Order order4 = new Order(500, DateTime.Now, 7, 10);
-                Order order5 = new Order(30, DateTime.Now, 8, 9);
-                Order order6 = new Order(800, DateTime.Now, 8, 13);
+                Console.WriteLine(restroom1.ReserveRestroom(client1, DateTime.Now, 8, 10));
+                Console.WriteLine(restroom1.ReserveRestroom(client2, DateTime.Now, 10, 11));
+                restroom1.ReserveRestroom(client1, DateTime.Now, 13, 18);
+                restroom1.ReserveRestroom(client2, DateTime.Now, 19, 20);
 
 
-                client1.AddOrder(order1);
-                client1.AddOrder(order3);
-                client1.AddOrder(order4);
-                client1.AddOrder(order5);
-
-                client2.AddOrder(order2);
-                client2.AddOrder(order4);
-                client2.AddOrder(order6);
-
-
+                context.Orders.AddRange(restroom1.Orders.ToArray());
                 context.Clients.AddRange(client1, client2);
-                context.Orders.AddRange(order1, order2, order3, order4, order5, order6);
+                context.Restrooms.AddRange(restroom1);
 
                 context.SaveChanges();
             }
             */
 
-
+            
             using (ApplicationContext context = new ApplicationContext())
             {
                 context.Database.EnsureCreated();
 
+                var restroom = context.Restrooms.ToList();
                 var clients = context.Clients.ToList();
                 var orders = context.Orders.ToList();
 
+                restroom.First().UnreserveRestroom(3);
 
+                /*
                 foreach (var item in clients)
                 {
                     Console.WriteLine("Name = " + item.Name + "  Surname = " + item.Surname);
@@ -68,11 +61,11 @@ namespace UI
                     }
                     Console.WriteLine("========================");
                 }
-
+                */
 
                 context.SaveChanges();
             }
-
+            
         }
     }
 }
