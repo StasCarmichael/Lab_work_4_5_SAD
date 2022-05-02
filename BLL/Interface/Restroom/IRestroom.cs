@@ -4,7 +4,7 @@ using BLL.ConnectionInterface;
 
 namespace BLL.Interface
 {
-    public interface IRestroom : IIdable, IManyOrderConnection, IReservable
+    public interface IRestroom : IIdable, IManyOrderConnection, IReservable, ISingleAnticafeConnection
     {
         string TypeRecreation { get; }
 

@@ -8,17 +8,22 @@ namespace BLL.Entity
 {
     public class Restroom : IRestroom
     {
+        private static int MIN_WORK = 0;
+        private static int MAX_WORK = 24;
         private static int MAX_DAY = 14;
+
+
         private ICollection<Order> orders;
+
 
         public int Id { get; private set; }
 
 
-        public Restroom(string typeRecreation, double pricePerHour, int workOut, int workUp)
+        internal Restroom(string typeRecreation, double pricePerHour, int workOut, int workUp)
         {
             TypeRecreation = typeRecreation;
             PricePerHour = pricePerHour;
-            if (workOut < 0 || workUp > 23 || workOut >= workUp)
+            if (workOut <= MIN_WORK || workUp >= MAX_WORK || workOut >= workUp)
                 throw new ArgumentException("WorkOut and WorkUp wrong data");
 
             WorkOut = workOut;
@@ -112,7 +117,6 @@ namespace BLL.Entity
 
             return (false, null);
         }
-
         public bool UnreserveRestroom(Order order)
         {
             order.Client.RemoveOrder(order);
@@ -131,6 +135,8 @@ namespace BLL.Entity
             return result;
         }
 
+        public IOrder GetOrder(int orderId) => Orders.Where(val => val.Id == orderId).FirstOrDefault();
+
 
         public ICollection<Order> Orders
         {
@@ -147,5 +153,9 @@ namespace BLL.Entity
                 orders = value;
             }
         }
+
+
+        public int AnticafeId { get; private set; }
+        public Anticafe Anticafe { get; private set; }
     }
 }

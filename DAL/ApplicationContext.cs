@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 using BLL.Entity;
 
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +11,7 @@ namespace DAL
         private string connectionString;
 
 
+        public DbSet<Anticafe> Anticafes { get; set; }
         public DbSet<Restroom> Restrooms { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
