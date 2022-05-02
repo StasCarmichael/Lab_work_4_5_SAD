@@ -1,12 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UoW.Repository.Class;
 
 namespace UoW.UnitWork
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
+        AnticafeRepository Anticafes { get; }
+        RestroomRepository Restrooms { get; }
+        ClientRepository Clients { get; }
+        OrderRepository Orders { get; }
+
+
+        void Save();
     }
 }

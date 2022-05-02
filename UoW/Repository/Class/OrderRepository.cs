@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using BLL.Entity;
 
 namespace UoW.Repository.Class
 {
-    class OrderRepository
+    public class OrderRepository : GenericRepository<Order>
     {
+        public OrderRepository(DbContext dbContext) : base(dbContext) { }
     }
 }

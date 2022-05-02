@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL.Interface;
 
 namespace UoW.Repository.Interface
 {
-    interface IClientRepository
+    public interface IClientRepository
     {
+        public IClient GetByName(string name);
     }
 }

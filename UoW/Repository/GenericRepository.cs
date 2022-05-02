@@ -41,7 +41,11 @@ namespace UoW.Repository
         public virtual TEntity Get(int id) { return dbSet.Find(id); }
 
 
-        public virtual void Insert(TEntity entity) { dbSet.Add(entity); }
+        public virtual void Add(TEntity entity) { dbSet.Add(entity); }
+        public virtual void Add(params TEntity[] item) 
+        {
+            dbSet.AddRange(item);
+        }
         public virtual void Update(TEntity item)
         {
             dbContext.Entry(item).State = EntityState.Modified;
@@ -54,8 +58,8 @@ namespace UoW.Repository
             TEntity entityToDelete = dbSet.Find(id);
 
             // delete finded
-            if (entityToDelete == null) throw new InvalidOperationException("There is no records with such id");
-            Delete(entityToDelete);
+            if (entityToDelete != null)
+                Delete(entityToDelete);
         }
         public virtual void Delete(TEntity entityToDelete)
         {
@@ -72,30 +76,6 @@ namespace UoW.Repository
             if (predicate != null) dbSet.RemoveRange(dbSet.Where(predicate));
             else dbSet.RemoveRange(dbSet);
         }
-
-
-        public void Save() => dbContext.SaveChanges();
-
-
-        #region IDispose
-
-        private bool disposed = false;
-
-        public virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-                if (disposing)
-                    dbContext.Dispose();
-
-            this.disposed = true;
-        }
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
 
     }
 }

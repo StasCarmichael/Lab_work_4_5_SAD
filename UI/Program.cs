@@ -6,6 +6,9 @@ using DAL;
 using BLL.Entity;
 using BLL.Interface;
 
+using UoW.Repository;
+using UoW.UnitWork;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace UI
@@ -14,12 +17,16 @@ namespace UI
     {
         static void Main(string[] args)
         {
-
+            /*
             using (ApplicationContext context = new ApplicationContext())
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
+                UnitOfWork unitOfWork = new UnitOfWork(context);
+
+                var anticafes = unitOfWork.Anticafes;
+                var clients = unitOfWork.Clients;
 
                 Anticafe anticafe1 = new Anticafe("Somerset", "Kiev Chrechatic 32 Б");
 
@@ -40,78 +47,46 @@ namespace UI
                 res3.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 10), 10, 20);
                 res1.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 6), 8, 22);
 
-                context.Clients.AddRange(client1, client2, client3);
-                context.Anticafes.AddRange(anticafe1);
+                clients.Add(client1, client2, client3);
+                anticafes.Add(anticafe1);
 
-                context.SaveChanges();
+                unitOfWork.Save();
             }
+            */
 
 
-
-            /*
+            
             using (ApplicationContext context = new ApplicationContext())
             {
-                context.Database.EnsureCreated();
+                UnitOfWork unitOfWork = new UnitOfWork(context);
 
-                var restroom = context.Restrooms.ToList();
-                var clients = context.Clients.ToList();
-                var orders = context.Orders.ToList();
+                var anticafes = unitOfWork.Anticafes.Get().ToList();
+                var restrooms = unitOfWork.Restrooms.Get().ToList();
+                var orders = unitOfWork.Orders.Get().ToList();
+                var clients = unitOfWork.Clients.Get().ToList();
 
-                restroom.First().UnreserveRestroom(3);
 
-                
-                foreach (var item in clients)
+                foreach (var anticafe in anticafes)
                 {
-                    Console.WriteLine("Name = " + item.Name + "  Surname = " + item.Surname);
-                    foreach (var order in item.Orders)
+                    Console.WriteLine("Anticafe Id = " + anticafe.Id);
+                    foreach (var restroom in anticafe.Restrooms)
                     {
-                        Console.WriteLine("Id = " + order.Id);
+                        Console.WriteLine("Restroom Id = " + restroom.Id);
+                        foreach (var order in restroom.Orders)
+                        {
+                            Console.WriteLine("Name = " + order.Client.Name + "  Surname = " + order.Client.Surname);                       
+                            Console.WriteLine("Order Id = " + order.Id);                            
+                            Console.WriteLine("========================");
+                        }
                     }
-                    Console.WriteLine("========================");
                 }
                 
 
-                context.SaveChanges();
+                unitOfWork.Save();
             }
-            */
+            
 
 
-            /*
-            using (ApplicationContext context = new ApplicationContext())
-            {
-                context.Database.EnsureCreated();
-
-                var restrooms = context.Restrooms.ToList();
-                var clients = context.Clients.ToList();
-                var orders = context.Orders.ToList();
-
-                var restroom1 = new Restroom("Настільні ігри", 20, 10, 20);
-                var client1 = clients.Where(val => val.Id == 1).FirstOrDefault();
-                restroom1.ReserveRestroom(client1, new DateTime(2022, 05, 12), 10, 18);
-                restroom1.ReserveRestroom(client1, new DateTime(2022, 05, 12), 16, 20);
-
-                context.Restrooms.Add(restroom1);
-                
-                context.SaveChanges();
-            }
-            */
-
-            /*
-            using (ApplicationContext context = new ApplicationContext())
-            {
-                context.Database.EnsureCreated();
-
-                var restrooms = context.Restrooms.ToList();
-                var clients = context.Clients.ToList();
-                var orders = context.Orders.ToList();
-
-                var restroom1 = restrooms.Where(val => val.Id == 2).FirstOrDefault();
-                var client1 = clients.Where(val => val.Id == 2).FirstOrDefault();
-                restroom1.ReserveRestroom(client1, new DateTime(2022, 05, 2), 10, 13);
-
-                context.SaveChanges();
-            }
-            */
 
         }
     }

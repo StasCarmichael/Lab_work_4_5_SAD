@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using BLL.Entity;
 
 namespace UoW.Repository.Class
 {
-    class RestroomRepository
+    public class RestroomRepository : GenericRepository<Restroom>
     {
+        public RestroomRepository(DbContext dbContext) : base(dbContext) { }
     }
 }
