@@ -1,5 +1,4 @@
-﻿
-namespace BLL.Interface
+﻿namespace BLL.Interface
 {
     public interface IAccountable
     {

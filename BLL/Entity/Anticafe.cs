@@ -60,10 +60,7 @@ namespace BLL.Entity
         }
 
 
-        public IRestroom GetRestroom(int restroomId)
-        {
-            return restrooms.Where(val => val.Id == restroomId).FirstOrDefault();
-        }
+        public IRestroom GetRestroom(int restroomId) { return restrooms.Where(val => val.Id == restroomId).FirstOrDefault(); }
 
 
         public ICollection<Restroom> Restrooms
@@ -77,10 +74,6 @@ namespace BLL.Entity
 
 
                 return rest;
-            }
-            private set
-            {
-                restrooms = value.ToList();
             }
         }
     }

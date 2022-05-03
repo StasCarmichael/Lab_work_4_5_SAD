@@ -46,13 +46,14 @@ namespace BLL.Test
                 res2.restroom?.ReserveRestroom(client2, new DateTime(2022, 5, 4), 12, 15);
                 res3.restroom?.ReserveRestroom(client2, new DateTime(2022, 5, 8), 10, 20);
                 res3.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 10), 10, 20);
+                res3.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 10), 10, 20);
                 res1.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 6), 8, 22);
+                res1.restroom?.ReserveSpecialProgramRestroom(client3, "JUST CHILL", new DateTime(2022, 5, 7));
 
                 clients.Add(client1, client2, client3);
                 anticafes.Add(anticafe1);
 
                 unitOfWork.Save();
-
 
                 Assert.Equal(unitOfWork.Clients.Get().ToList().Where(val => val.Id == 1).FirstOrDefault().Name, client1.Name);
             }
@@ -75,7 +76,11 @@ namespace BLL.Test
                 var orders = unitOfWork.Orders.Get().ToList();
                 var clients = unitOfWork.Clients.Get().ToList();
 
-                PrintAnricafes(anticafes);
+                restrooms.FirstOrDefault().IsReserve(new DateTime(2022, 5, 7));
+
+                GetInfoMessage(anticafes);
+
+                unitOfWork.Dispose(true);
 
                 Assert.True(true);
             }
@@ -90,32 +95,145 @@ namespace BLL.Test
 
                 UnitOfWork unitOfWork = new UnitOfWork(context);
 
-                var anticafes = unitOfWork.Anticafes.Get().ToList();
-                var restrooms = unitOfWork.Restrooms.Get().ToList();
-                var orders = unitOfWork.Orders.Get().ToList();
-                var clients = unitOfWork.Clients.Get().ToList();
+                var anticafes = unitOfWork.Anticafes;
+                var restrooms = unitOfWork.Restrooms;
+                var orders = unitOfWork.Orders;
+                var clients = unitOfWork.Clients;
 
                 var res = true;
-                res = res || anticafes.FirstOrDefault().RemoveRestroom(1);
+                res = res || anticafes.Get().First().RemoveRestroom(1);
 
                 unitOfWork.Save();
 
-                anticafes = unitOfWork.Anticafes.Get().ToList();
-                restrooms = unitOfWork.Restrooms.Get().ToList();
-                orders = unitOfWork.Orders.Get().ToList();
-                clients = unitOfWork.Clients.Get().ToList();
+                anticafes = unitOfWork.Anticafes;
+                restrooms = unitOfWork.Restrooms;
+                orders = unitOfWork.Orders;
+                clients = unitOfWork.Clients;
 
-                res = res || restrooms.FirstOrDefault().UnreserveRestroom(restrooms.FirstOrDefault().Orders.FirstOrDefault());
+                res = res || restrooms.Get().FirstOrDefault().UnreserveRestroom(restrooms.Get().FirstOrDefault().Orders.FirstOrDefault());
+                unitOfWork.Save();
 
-                var ans = restrooms.FirstOrDefault().ReserveRestroom(clients.FirstOrDefault(), new DateTime(2022, 5, 7), 11, 13);
-                restrooms.FirstOrDefault().UnreserveRestroom(ans.order.Id);
+                anticafes = unitOfWork.Anticafes;
+                restrooms = unitOfWork.Restrooms;
+                orders = unitOfWork.Orders;
+                clients = unitOfWork.Clients;
+
+                var ans = restrooms.Get().FirstOrDefault().ReserveRestroom(clients.Get().FirstOrDefault(), new DateTime(2022, 5, 7), 11, 13);
+
+                unitOfWork.Save();
+
+                anticafes = unitOfWork.Anticafes;
+                restrooms = unitOfWork.Restrooms;
+                orders = unitOfWork.Orders;
+                clients = unitOfWork.Clients;
+
+                clients.Update(clients.Get().FirstOrDefault());
+                clients.Count();
+
+                restrooms.Get().FirstOrDefault().UnreserveRestroom(ans.order.Id);
 
                 Assert.True(res);
             }
         }
 
+        [Fact]
+        public void TestCustomDB()
+        {
+            using (ApplicationContext context = new ApplicationContext("Data Source=appDataBase.sqlite"))
+            {
+                UnitOfWork unitOfWork = new UnitOfWork(context);
 
-        private static void PrintAnricafes(List<Anticafe> anticafes)
+                Assert.True(true);
+            }
+        }
+
+        [Fact]
+        public void TestAnticafeFunstional()
+        {
+            using (ApplicationContext context = new ApplicationContext())
+            {
+                TestAddedEntityInitDb();
+
+                UnitOfWork unitOfWork = new UnitOfWork(context);
+
+                var anticafes = unitOfWork.Anticafes;
+                var restrooms = unitOfWork.Restrooms;
+                var orders = unitOfWork.Orders;
+                var clients = unitOfWork.Clients;
+
+                anticafes.Count();
+                anticafes.Get().First().RemoveRestroom(anticafes.Get().FirstOrDefault().Restrooms.FirstOrDefault());
+                anticafes.Get().First().RemoveRestroom(2);
+
+                var res1 = restrooms.Get().FirstOrDefault().Anticafe;
+                var res2 = restrooms.Get().FirstOrDefault().AnticafeId;
+
+                unitOfWork.Save();
+
+                unitOfWork = new UnitOfWork(context);
+
+                var dataanticafes = unitOfWork.Anticafes.Get().ToList();
+                var datarestrooms = unitOfWork.Restrooms.Get().ToList();
+                var dataorders = unitOfWork.Orders.Get().ToList();
+                var dataclients = unitOfWork.Clients.Get().ToList();
+
+                anticafes = unitOfWork.Anticafes;
+                restrooms = unitOfWork.Restrooms;
+                orders = unitOfWork.Orders;
+                clients = unitOfWork.Clients;
+
+                restrooms.Get().FirstOrDefault().UnreserveRestroom(restrooms.Get().FirstOrDefault().Orders.FirstOrDefault());
+
+                anticafes.GetByName("IMAS");
+                clients.GetByName("Stas");
+
+                orders.Delete(1);
+                orders.Delete(val => val.Day == 5);
+
+                unitOfWork.Save();
+
+                Assert.True(true);
+            }
+        }
+
+        [Fact]
+        public void TestClientFunstional()
+        {
+            using (ApplicationContext context = new ApplicationContext())
+            {
+                TestAddedEntityInitDb();
+
+                UnitOfWork unitOfWork = new UnitOfWork(context);
+
+                var anticafes = unitOfWork.Anticafes;
+                var restrooms = unitOfWork.Restrooms;
+                var orders = unitOfWork.Orders;
+                var clients = unitOfWork.Clients;
+
+                var res1 = clients.Get(1).Surname;
+                var res2 = clients.Get(1).AmountOfMoney;
+                clients.Get(1).PutMoney(100);
+                clients.Get(1).WithdrawMoney(100);
+
+                var res3 = orders.Get(1).ClientId;
+                var res4 = orders.Get(1).Client;
+                var res5 = orders.Get(1).Restroom;
+                var res6 = orders.Get(1).RestroomId;
+
+                var res7 = restrooms.Get(1).GetOrder(restrooms.Get(1).Orders.FirstOrDefault().Id);
+
+                unitOfWork.Save();
+                unitOfWork.Dispose(true);
+                unitOfWork.Dispose(true);
+                unitOfWork.Dispose();
+
+                Assert.True(true);
+            }
+        }
+
+
+
+        private static void GetInfoMessage(List<Anticafe> anticafes)
         {
             string anticafePass = "///////////////////////////////////////";
             string restroomPass = "+++++++++++++++++++++++++++++++++++++++";

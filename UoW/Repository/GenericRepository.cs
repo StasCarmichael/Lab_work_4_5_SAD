@@ -60,9 +60,8 @@ namespace UoW.Repository
             if (entityToDelete == null) throw new ArgumentNullException(nameof(entityToDelete));
 
             if (dbContext.Entry(entityToDelete).State == EntityState.Detached)
-            {
                 dbSet.Attach(entityToDelete);
-            }
+
             dbSet.Remove(entityToDelete);
         }
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)

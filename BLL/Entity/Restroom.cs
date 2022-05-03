@@ -86,6 +86,25 @@ namespace BLL.Entity
             return timeList;
         }
 
+
+        public (bool result, Order order) ReserveSpecialProgramRestroom(IClient client, string namePersonalProgram, DateTime dateTime)
+        {
+            if ((dateTime - DateTime.Now).TotalDays <= MAX_DAY)
+            {
+                var schedule = GetSchedule(dateTime);
+                if (schedule == null || schedule.Count == 0)
+                {
+                    var order = new Order((WorkUp - WorkOut) * PricePerHour, namePersonalProgram, dateTime, WorkOut, WorkUp);
+
+                    client.AddOrder(order);
+                    orders.Add(order);
+
+                    return (true, order);
+                }
+            }
+
+            return (false, null);
+        }
         public (bool result, Order order) ReserveRestroom(IClient client, DateTime dateTime, int workOut, int workUp)
         {
             if ((dateTime - DateTime.Now).TotalDays <= MAX_DAY && workOut >= WorkOut && workUp <= WorkUp && workOut < workUp)
@@ -102,8 +121,6 @@ namespace BLL.Entity
                         if (res == false)
                             return (false, null);
                     }
-
-                    var dataClient = client as Client;
 
                     var price = (workUp - workOut) * PricePerHour;
                     Order order = new Order(price, TypeRecreation, dateTime, workOut, workUp);
@@ -135,6 +152,7 @@ namespace BLL.Entity
             return result;
         }
 
+
         public IOrder GetOrder(int orderId) => Orders.Where(val => val.Id == orderId).FirstOrDefault();
 
 
@@ -147,10 +165,6 @@ namespace BLL.Entity
                     list.Add(item);
 
                 return list;
-            }
-            private set
-            {
-                orders = value;
             }
         }
 

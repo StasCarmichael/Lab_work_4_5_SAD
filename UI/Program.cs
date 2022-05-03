@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 
 using DAL;
@@ -17,7 +18,10 @@ namespace UI
     {
         static void Main(string[] args)
         {
-            
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
             using (ApplicationContext context = new ApplicationContext())
             {
                 context.Database.EnsureDeleted();
@@ -46,16 +50,16 @@ namespace UI
                 res3.restroom?.ReserveRestroom(client2, new DateTime(2022, 5, 8), 10, 20);
                 res3.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 10), 10, 20);
                 res1.restroom?.ReserveRestroom(client3, new DateTime(2022, 5, 6), 8, 22);
+                res1.restroom?.ReserveSpecialProgramRestroom(client2, "День народження", new DateTime(2022, 5, 7));
+
 
                 clients.Add(client1, client2, client3);
                 anticafes.Add(anticafe1);
 
                 unitOfWork.Save();
             }
-            
 
 
-            
             using (ApplicationContext context = new ApplicationContext())
             {
                 UnitOfWork unitOfWork = new UnitOfWork(context);
@@ -67,7 +71,6 @@ namespace UI
 
 
                 PrintAnricafes(anticafes);
-
             }
 
 
@@ -103,6 +106,7 @@ namespace UI
                         Console.WriteLine("\t\tOrder Id = " + order.Id);
                         Console.WriteLine("\t\tClient Id = " + order.Client.Id);
                         Console.WriteLine("\t\tName = " + order.Client.Name + "  Surname = " + order.Client.Surname);
+                        Console.WriteLine("\t\tType Recreation = " + order.TypeRecreation);
                         Console.WriteLine("\t\tDate = " + order.GetTimeInterval().Date.ToShortDateString());
                         Console.WriteLine("\t\tSinceWhen = " + order.SinceWhen + "\t ToWhen = " + order.ToWhen);
 
@@ -113,5 +117,6 @@ namespace UI
                 Console.WriteLine(anticafePass);
             }
         }
+
     }
 }

@@ -8,9 +8,6 @@ namespace BLL.Entity
 {
     public class Client : IClient
     {
-        private double amountOfMoney;
-
-
         public Client(string name, string surname)
         {
             Name = name;
@@ -18,9 +15,9 @@ namespace BLL.Entity
 
             Orders = new LinkedList<Order>();
         }
-        public Client(string name, string surname, double amountOfMoney) : this(name , surname)
+        public Client(string name, string surname, double amountOfMoney) : this(name, surname)
         {
-            this.amountOfMoney = amountOfMoney;
+            AmountOfMoney = amountOfMoney;
         }
 
 
@@ -32,32 +29,12 @@ namespace BLL.Entity
 
         #region Account
 
-        public double AmountOfMoney
-        {
-            get
-            {
-                return amountOfMoney;
-            }
-            private set
-            {
-                amountOfMoney = value;
-            }
-        }
-        public void PutMoney(double sum)
-        {
-            amountOfMoney += sum;
-        }
+        public double AmountOfMoney { get; private set; }
+        public void PutMoney(double sum) { AmountOfMoney += sum; }
         public bool WithdrawMoney(double sum)
         {
-            if (amountOfMoney < sum)
-            {
-                return false;
-            }
-            else
-            {
-                amountOfMoney -= sum;
-                return true;
-            }
+            if (AmountOfMoney < sum) { return false; }
+            else { AmountOfMoney -= sum; return true; }
         }
 
         #endregion
@@ -73,6 +50,7 @@ namespace BLL.Entity
             else
                 return false;
         }
+
 
         public ICollection<Order> Orders { get; private set; }
     }
