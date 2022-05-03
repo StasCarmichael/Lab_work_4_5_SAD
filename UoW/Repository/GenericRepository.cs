@@ -42,14 +42,8 @@ namespace UoW.Repository
 
 
         public virtual void Add(TEntity entity) { dbSet.Add(entity); }
-        public virtual void Add(params TEntity[] item) 
-        {
-            dbSet.AddRange(item);
-        }
-        public virtual void Update(TEntity item)
-        {
-            dbContext.Entry(item).State = EntityState.Modified;
-        }
+        public virtual void Add(params TEntity[] item) { dbSet.AddRange(item); }
+        public virtual void Update(TEntity item) { dbContext.Entry(item).State = EntityState.Modified; }
 
 
         public virtual void Delete(int id)

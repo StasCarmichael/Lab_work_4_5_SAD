@@ -17,7 +17,7 @@ namespace UI
     {
         static void Main(string[] args)
         {
-            /*
+            
             using (ApplicationContext context = new ApplicationContext())
             {
                 context.Database.EnsureDeleted();
@@ -52,7 +52,7 @@ namespace UI
 
                 unitOfWork.Save();
             }
-            */
+            
 
 
             
@@ -66,28 +66,52 @@ namespace UI
                 var clients = unitOfWork.Clients.Get().ToList();
 
 
-                foreach (var anticafe in anticafes)
-                {
-                    Console.WriteLine("Anticafe Id = " + anticafe.Id);
-                    foreach (var restroom in anticafe.Restrooms)
-                    {
-                        Console.WriteLine("Restroom Id = " + restroom.Id);
-                        foreach (var order in restroom.Orders)
-                        {
-                            Console.WriteLine("Name = " + order.Client.Name + "  Surname = " + order.Client.Surname);                       
-                            Console.WriteLine("Order Id = " + order.Id);                            
-                            Console.WriteLine("========================");
-                        }
-                    }
-                }
-                
+                PrintAnricafes(anticafes);
 
-                unitOfWork.Save();
             }
-            
+
+
+        }
 
 
 
+        static void PrintAnricafes(List<Anticafe> anticafes)
+        {
+            string anticafePass = "///////////////////////////////////////";
+            string restroomPass = "+++++++++++++++++++++++++++++++++++++++";
+            string orderPass = "========================================";
+
+
+            foreach (var anticafe in anticafes)
+            {
+                Console.WriteLine("Anticafe Id = " + anticafe.Id);
+                Console.WriteLine("Name = " + anticafe.Name);
+                Console.WriteLine("Address = " + anticafe.Address);
+
+                Console.WriteLine(anticafePass);
+                foreach (var restroom in anticafe.Restrooms)
+                {
+                    Console.WriteLine("\tRestroom Id = " + restroom.Id);
+                    Console.WriteLine("\tType of room = " + restroom.TypeRecreation);
+                    Console.WriteLine("\tPrice per hour = " + restroom.PricePerHour);
+
+                    Console.WriteLine(restroomPass);
+                    foreach (var order in restroom.Orders)
+                    {
+                        Console.WriteLine(orderPass);
+
+                        Console.WriteLine("\t\tOrder Id = " + order.Id);
+                        Console.WriteLine("\t\tClient Id = " + order.Client.Id);
+                        Console.WriteLine("\t\tName = " + order.Client.Name + "  Surname = " + order.Client.Surname);
+                        Console.WriteLine("\t\tDate = " + order.GetTimeInterval().Date.ToShortDateString());
+                        Console.WriteLine("\t\tSinceWhen = " + order.SinceWhen + "\t ToWhen = " + order.ToWhen);
+
+                        Console.WriteLine(orderPass);
+                    }
+                    Console.WriteLine(restroomPass);
+                }
+                Console.WriteLine(anticafePass);
+            }
         }
     }
 }
