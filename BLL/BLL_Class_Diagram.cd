@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BLL.Entity.Anticafe" BaseTypeListCollapsed="true">
+    <Position X="6" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAAAAAAAAAAAQAGAAAAAACCAAgAgAIACI=</HashCode>
+      <FileName>Entity\Anticafe.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="restrooms" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BLL.Entity.Client" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAgAEAAAAAAAAAACAQABAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Entity\Client.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Orders" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BLL.Entity.Order" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAJAAYAgAAhAAAAIAAAAAAAAAEIAAAAgAAAAQ=</HashCode>
+      <FileName>Entity\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+      <Property Name="Restroom" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BLL.Entity.Restroom" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAEDAQABBARAAgAIAAAQAAQABAAQAAAAAAAwAAAAACg=</HashCode>
+      <FileName>Entity\Restroom.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="orders" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BLL.Entity.TimeInterval" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAIAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Entity\TimeInterval.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="BLL.Interface.IAnticafe" Collapsed="true">
+    <Position X="6" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAQAGAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Anticafe\IAnticafe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IClient" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAQABAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Interface\Client\IClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IOrder" Collapsed="true">
+    <Position X="11.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Order\IOrder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.ITimeInterval">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAIAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Order\ITimeInterval.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IRestroom" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAARAAgAIAAAAAAQAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Interface\Restroom\IRestroom.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.Collections.Generic.ICollection&lt;T&gt;" Collapsed="true">
+    <Position X="10.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="BLL.Interface.IAnticafe">
+    <Position X="13.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAQAGAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Anticafe\IAnticafe.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IAccountable" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAACAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Client\IAccountable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IClient">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAQABAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Interface\Client\IClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IDate" Collapsed="true">
+    <Position X="10.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAJAAQAAAAAAAAAIAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Order\IDate.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IOrder">
+    <Position X="10.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Order\IOrder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.ITimeInterval">
+    <Position X="13.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAIAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Order\ITimeInterval.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IReservable" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\Restroom\IReservable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.Interface.IRestroom">
+    <Position X="7.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAARAAgAIAAAAAAQAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Interface\Restroom\IRestroom.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.ConnectionInterface.IIdable" Collapsed="true">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConnectionInterface\IIdable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.ConnectionInterface.IManyOrderConnection">
+    <Position X="5.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConnectionInterface\IManyOrderConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.ConnectionInterface.IManyRestroomConnection">
+    <Position X="13.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>ConnectionInterface\IManyRestroomConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.ConnectionInterface.ISingleAnticafeConnection">
+    <Position X="7.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConnectionInterface\ISingleAnticafeConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.ConnectionInterface.ISingleClientConnection">
+    <Position X="11.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>ConnectionInterface\ISingleClientConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BLL.ConnectionInterface.ISingleRestroomConnection">
+    <Position X="9.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>ConnectionInterface\ISingleRestroomConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
